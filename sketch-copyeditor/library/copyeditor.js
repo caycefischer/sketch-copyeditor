@@ -7,7 +7,7 @@ com.translate = {
     },
 
     alert: function (msg, title) {
-        title = title || 'Sketch translate';
+        title = title || 'Sketch Copy Update';
         var app = [NSApplication sharedApplication];
         [app displayDialog:msg withTitle:title];
     },
@@ -39,7 +39,12 @@ com.translate = {
             var textLayer = textLayers[i],
                     stringValue = unescape(textLayer.stringValue());
 
-            localeObject[stringValue] = stringValue;
+            // localeObject[stringValue] = stringValue;
+
+            var textLayer2 = textLayers[i],
+                stringValue2 = unescape(textLayer2.name());
+
+            localeObject[stringValue2] = stringValue;
         }
 
         var localeJsonString = JSON.stringify(localeObject, undefined, 2);
@@ -61,14 +66,15 @@ com.translate = {
         var clipboard = NSPasteboard.generalPasteboard();
         clipboard.declareTypes_owner([NSPasteboardTypeString], null);
         clipboard.setString_forType(string , NSPasteboardTypeString);
-        this.alert('The translation file has been copied to your clipboard, paste it in your favorite editor and save it as a *.json file for example \'en-US.json\'.\n\nWhen you are ready to import your changes run \'2. Translate page\' and pick your json file that contains the translations.', null);
+        this.alert('The translation file has been copied to your clipboard, paste it in your favorite editor and save it as a *.json file for example \'en-US.json\'.\n\nWhen you are ready to import your changes run \'2. Update Copy\' and pick your json file that contains the translations.', null);
         return true;
     },
 
     translatePageWithData: function(page, language, data) {
         var pageName = [page name],
                 page = [page copy]
-                page.setName(pageName + ': ' + language),
+                // page.setName(pageName + ': ' + language),
+                page.setName(language),
                 textLayers = this.getTextLayersForPage(page),
                 errorCount = 0;
 
@@ -76,9 +82,11 @@ com.translate = {
 
         for (var i = 0; i < textLayers.length; i++) {
             var textLayer = textLayers[i],
-                    stringValue = unescape(textLayer.stringValue());
-            if(data[stringValue]){
-                textLayer.setStringValue(data[stringValue]);
+                    nameValue = unescape(textLayer.name());
+            
+            // THIS
+            if(data[nameValue]){
+                textLayer.setStringValue(data[nameValue]);
                 [textLayer adjustFrameToFit];
             }else{
                 errorCount++;
@@ -92,7 +100,7 @@ com.translate = {
 
         var loop = [artboards objectEnumerator]
         while (artboard = loop.nextObject()) {
-            artboard.setName(artboard.name() + "_" + language);
+            // artboard.setName(artboard.name() + "_" + language);
         }
 
         return errorCount;
@@ -113,8 +121,8 @@ com.translate = {
         [openPanel setDirectoryURL:defaultDirectory];
         [openPanel setAllowsMultipleSelection: true]
 
-        [openPanel setTitle:"Pick a translation file"];
-        [openPanel setPrompt:"Translate"];
+        [openPanel setTitle:"Pick a copy file"];
+        [openPanel setPrompt:"Update Copy"];
 
         if ([openPanel runModal] == NSOKButton) {
             var urls = [openPanel URLs];
@@ -132,9 +140,9 @@ com.translate = {
                 }
             }
             if (errorCount > 0){
-                this.alert('Translation completed with ' + errorCount + ' errors.', null);
+                this.alert('Copy Update completed with ' + errorCount + ' errors.', null);
             }else{
-                this.alert('Translation completed successfully', null);
+                this.alert('Copy Update completed successfully! *** IMPORTANT: Please immediately save your file, close it and then reopen it. This avoids any Sketch bugs or weirdness. ***', null);
             }
         }
 
