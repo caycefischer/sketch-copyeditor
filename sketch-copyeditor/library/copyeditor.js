@@ -66,7 +66,7 @@ com.translate = {
         var clipboard = NSPasteboard.generalPasteboard();
         clipboard.declareTypes_owner([NSPasteboardTypeString], null);
         clipboard.setString_forType(string , NSPasteboardTypeString);
-        this.alert('The copy deck for this Sketch file has been copied to your clipboard, paste it in a text editor and save it as a *.json file for example \'en-US.json\'.\n\nWhen you are ready to import your changes run \'2. Update Copy\' and pick your json file that contains the updated copy.', null);
+        this.alert('The copy deck for this Sketch file has been copied to your clipboard, paste it in a text editor and save it as a *.json file for example \'copydeck-V1.json\'.\n\nWhen you are ready to import your changes run \'2. Update Copy\' and pick your json file that contains the updated copy.', null);
         return true;
     },
 
