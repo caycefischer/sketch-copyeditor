@@ -66,7 +66,7 @@ com.translate = {
         var clipboard = NSPasteboard.generalPasteboard();
         clipboard.declareTypes_owner([NSPasteboardTypeString], null);
         clipboard.setString_forType(string , NSPasteboardTypeString);
-        this.alert('The translation file has been copied to your clipboard, paste it in your favorite editor and save it as a *.json file for example \'en-US.json\'.\n\nWhen you are ready to import your changes run \'2. Update Copy\' and pick your json file that contains the translations.', null);
+        this.alert('The copy deck for this Sketch file has been copied to your clipboard, paste it in a text editor and save it as a *.json file for example \'en-US.json\'.\n\nWhen you are ready to import your changes run \'2. Update Copy\' and pick your json file that contains the updated copy.', null);
         return true;
     },
 
@@ -142,7 +142,7 @@ com.translate = {
             if (errorCount > 0){
                 this.alert('Copy Update completed with ' + errorCount + ' errors.', null);
             }else{
-                this.alert('Copy Update completed successfully! *** IMPORTANT: Please immediately save your file, close it and then reopen it. This avoids any Sketch bugs or weirdness. ***', null);
+                this.alert('Copy Update completed successfully! \n*** IMPORTANT: Please immediately save your file, close it and then reopen it. This avoids any Sketch bugs or weirdness. ***', null);
             }
         }
 
