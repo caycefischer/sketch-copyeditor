@@ -8,7 +8,7 @@ Sketch Copy Editor lets writers and designers work together to bring copy update
 
 ## Usage
 ### Creating a copy deck
-1. Select a page in your Sketch file.
+1. Select a page in your Sketch file. Make sure ALL TEXT LAYERS have a unique name.
 2. Run `1. Generate copy deck` from the plugins menu.
 3. All the copy from your design is now in your clipboard.
 4. Create a blank file in your text editor and paste in the contents of your clipboard.
