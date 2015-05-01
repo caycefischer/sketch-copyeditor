@@ -1,3 +1,3 @@
 #import 'library/copyeditor.js'
 
-com.translate.copyStringToClipboard(com.translate.generateLocaleForCurrentPage());
+com.updatecopy.copyStringToClipboard(com.updatecopy.generateLocaleForCurrentPage());

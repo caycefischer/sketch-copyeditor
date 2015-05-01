@@ -1,6 +1,6 @@
 var com = {};
 
-com.translate = {
+com.updatecopy = {
 
     debugLog: function(msg) {
         if(this.debug) log(msg);
@@ -70,7 +70,7 @@ com.translate = {
         return true;
     },
 
-    translatePageWithData: function(page, language, data) {
+    updatePageWithData: function(page, language, data) {
         var pageName = [page name],
                 page = [page copy]
                 // page.setName(pageName + ': ' + language),
@@ -106,7 +106,7 @@ com.translate = {
         return errorCount;
     },
 
-    translatePageWithFilePicker: function(page) {
+    updatePageWithFilePicker: function(page) {
         var openPanel = [NSOpenPanel openPanel];
 
         var defaultDirectory = [NSURL fileURLWithPath:"~/Documents/"];
@@ -136,7 +136,7 @@ com.translate = {
 
                 if(getString){
                     data = JSON.parse(getString.toString());
-                    errorCount += this.translatePageWithData(page, filename, data);
+                    errorCount += this.updatePageWithData(page, filename, data);
                 }
             }
             if (errorCount > 0){
