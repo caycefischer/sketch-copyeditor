@@ -33,4 +33,4 @@ To propose changes, fork the repository and submit a pull request!
 [@zakkain](http://twitter.com/zakkain)
 
 ## Attribution
-This plugin is a fork of [(Florian Schulz's)](https://github.com/getflourish) [Sketch i18n](https://github.com/kristof/sketch-i18n) plugin. I could not have done this without him doing all the hard work first.
+This plugin is forked from @houbenkristof's [Sketch i18n](https://github.com/kristof/sketch-i18n) plugin. I just tweaked some stuff to suit my needs.
