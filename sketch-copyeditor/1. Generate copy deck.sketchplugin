@@ -1,3 +1,4 @@
 #import 'library/copyeditor.js'
 
-com.updatecopy.copyStringToClipboard(com.updatecopy.generateLocaleForCurrentPage());
+// ---------- markgoetz edit: change to saveStringToFile function ----------
+com.updatecopy.saveStringToFile(com.updatecopy.generateLocaleForCurrentPage());
