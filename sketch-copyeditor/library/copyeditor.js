@@ -142,6 +142,9 @@ com.updatecopy = {
     copyStringToCSV: function(string) {
         var outputString = [NSString stringWithFormat:"%@", string];
         var filePath = "/Users/"+ NSUserName() +"/Desktop/copyDeck.csv";
+
+        new AppSandbox().authorize(filePath, function() {});
+
         [outputString writeToFile:filePath atomically:true encoding:NSUTF8StringEncoding error:nil];
         return true;
     },

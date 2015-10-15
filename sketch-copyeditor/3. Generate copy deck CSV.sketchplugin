@@ -1,3 +1,4 @@
 @import 'library/copyeditor.js'
+@import 'library/sandbox.js'
 
 com.updatecopy.copyStringToCSV(com.updatecopy.generateCSVForCurrentPage());
