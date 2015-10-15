@@ -1,0 +1,3 @@
+@import 'library/copyeditor.js'
+
+com.updatecopy.copyStringToCSV(com.updatecopy.generateCSVForCurrentPage());
