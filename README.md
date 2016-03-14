@@ -34,6 +34,7 @@ To propose changes, fork the repository and submit a pull request!
 [@markgoetz](http://twitter.com/markdoesnttweet/)
 [@zakkain](http://twitter.com/zakkain)
 [@ericpuigmarti](http://twitter.com/ericpuigmarti)
+[@jofreund](http://twitter.com/jofreund/)
 
 ## Attribution
 This plugin is forked from @houbenkristof's [Sketch i18n](https://github.com/kristof/sketch-i18n) plugin. I just tweaked some stuff to suit my needs.
