@@ -14,6 +14,9 @@ Sketch Copy Editor lets writers and designers work together to bring copy update
 4. Create a blank file in your text editor and paste in the contents of your clipboard.
 6. Save the file as a JSON file for example: `copydeck_V1.json`.
 
+### Excluding layers from export
+If you would like to exclude a layer from the export, just prefix it using "__".
+
 ### For Writers
 1. Open the copy deck JSON file
 2. You will see every piece of copy from the design. The left hand side is the name of the layer in Sketch (DESIGNERS: Name your layers properly so your writer knows what they're looking at!). The right hand side is the copy.
