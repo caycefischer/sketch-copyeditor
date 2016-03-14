@@ -49,9 +49,9 @@ com.updatecopy = {
         for (var i = 0; i < textLayers.length; i++) {
             var textLayer = textLayers[i],
                     stringValue = unescape(textLayer.stringValue()),
-                name = unescape(textLayer.name());
+                    name = unescape(textLayer.name());
 
-          csv_string += "\"" + name + "\",\"" + stringValue + "\"\n";
+            csv_string += "\"" + name + "\",\"" + stringValue + "\"\n";
         }
 
         return csv_string;
