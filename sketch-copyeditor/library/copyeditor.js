@@ -18,7 +18,9 @@ com.updatecopy = {
         for (var i = 0; i < layers.count(); i++) {
             var layer = [layers objectAtIndex:i];
             if (this.isTextLayer(layer)) {
-                textLayers.push(layer);
+                if (this.isExportTextLayer(layer)) {
+                  textLayers.push(layer);
+                }
             }
         }
 
@@ -32,19 +34,23 @@ com.updatecopy = {
         return false;
     },
 
+    isExportTextLayer: function(textLayer) {
+      var nameStringValue = unescape(textLayer.name());
+      if (nameStringValue.search('__')) {
+        return true;
+      }
+      return false;
+    },
+
     localeStringFromTextLayers: function(textLayers) {
         var localeObject = {};
 
         for (var i = 0; i < textLayers.length; i++) {
             var textLayer = textLayers[i],
-                    stringValue = unescape(textLayer.stringValue());
+                    textStringValue = unescape(textLayer.stringValue());
+            var nameStringValue = unescape(textLayer.name());
 
-            // localeObject[stringValue] = stringValue;
-
-            var textLayer2 = textLayers[i],
-                stringValue2 = unescape(textLayer2.name());
-
-            localeObject[stringValue2] = stringValue;
+            localeObject[nameStringValue] = textStringValue;
         }
 
         var localeJsonString = JSON.stringify(localeObject, undefined, 2);
@@ -83,7 +89,7 @@ com.updatecopy = {
         for (var i = 0; i < textLayers.length; i++) {
             var textLayer = textLayers[i],
                     nameValue = unescape(textLayer.name());
-            
+
             // THIS
             if(data[nameValue]){
                 textLayer.setStringValue(data[nameValue]);
