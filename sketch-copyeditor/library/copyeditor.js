@@ -18,7 +18,9 @@ com.updatecopy = {
         for (var i = 0; i < layers.count(); i++) {
             var layer = [layers objectAtIndex:i];
             if (this.isTextLayer(layer)) {
-                textLayers.push(layer);
+                if (this.isExportTextLayer(layer)) {
+                    textLayers.push(layer);
+                }
             }
         }
 
@@ -32,19 +34,27 @@ com.updatecopy = {
         return false;
     },
 
-  /* ---------- begin markgoetz edits: output the text in CSV format instead of JSON ---------- */
+    isExportTextLayer: function(textLayer) {
+        var nameStringValue = unescape(textLayer.name());
+        if (nameStringValue.search('__')) {
+            return true;
+        }
+
+        return false;
+    },
+
     localeStringFromTextLayers: function(textLayers) {
-      var csv_string = "";
+        var csv_string = "";
 
         for (var i = 0; i < textLayers.length; i++) {
             var textLayer = textLayers[i],
                     stringValue = unescape(textLayer.stringValue()),
-                name = unescape(textLayer.name());
+                    name = unescape(textLayer.name());
 
-          csv_string += "\"" + name + "\",\"" + stringValue + "\"\n";
+            csv_string += "\"" + name + "\",\"" + stringValue + "\"\n";
         }
 
-      return csv_string;
+        return csv_string;
     },
   /* ---------- end markgoetz edits ---------- */
 
@@ -67,22 +77,22 @@ com.updatecopy = {
         return true;
     },
 
-  /*  ---------- begin markgoetz edits: save the text to a file instead of to the clipboard.  ---------- */
-  saveStringToFile: function(string) {
-    try {
-      var panel = NSSavePanel.savePanel();
-      if ([panel runModal] == NSOKButton) {
-          var url = [panel URL];
-          var cocoaString = [NSString stringWithFormat:"%@", string];
-          [cocoaString writeToURL:url atomically:false encoding:NSWindowsCP1252StringEncoding error:nil];
+    /*  ---------- begin markgoetz edits: save the text to a file instead of to the clipboard.  ---------- */
+    saveStringToFile: function(string) {
+        try {
+            var panel = NSSavePanel.savePanel();
+            if ([panel runModal] == NSOKButton) {
+                var url = [panel URL];
+                var cocoaString = [NSString stringWithFormat:"%@", string];
+                [cocoaString writeToURL:url atomically:false encoding:NSWindowsCP1252StringEncoding error:nil];
+            }
+            return true;
         }
-        return true;
-      }
-    catch(e) {
-      log(e)
-    }
-  },
-  /* ---------- end markgoetz edits ---------- */
+        catch(e) {
+            log(e);
+        }
+    },
+    /* ---------- end markgoetz edits ---------- */
 
     updatePageWithData: function(page, language, data) {
         var pageName = [page name],

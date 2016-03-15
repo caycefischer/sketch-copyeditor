@@ -12,6 +12,9 @@ Sketch Copy Editor lets writers and designers work together to bring copy update
 2. Run `1. Generate copy deck` from the plugins menu.
 3. The copy is saved to a file in CSV format.
 
+### Excluding layers from export
+If you would like to exclude a layer from the export, just prefix it using "__".
+
 ### For Writers
 1. Open the copy deck CSV file in Excel.
 2. You will see every piece of copy from the design. The left hand side is the name of the layer in Sketch (DESIGNERS: Name your layers properly so your writer knows what they're looking at!). The right hand side is the copy.
@@ -31,6 +34,7 @@ To propose changes, fork the repository and submit a pull request!
 [@markgoetz](http://twitter.com/markdoesnttweet/)
 [@zakkain](http://twitter.com/zakkain)
 [@ericpuigmarti](http://twitter.com/ericpuigmarti)
+[@jofreund](http://twitter.com/jofreund/)
 
 ## Attribution
 This plugin is forked from @houbenkristof's [Sketch i18n](https://github.com/kristof/sketch-i18n) plugin. I just tweaked some stuff to suit my needs.
