@@ -51,7 +51,7 @@ com.updatecopy = {
 
         for (var i = 0; i < textLayers.length; i++) {
             var textLayer = textLayers[i],
-                    stringValue = unescape(textLayer.stringValue()),
+                    stringValue = unescape(textLayer.stringValue().replace(/[\r\n]+/g, ' ')),
                     name = unescape(textLayer.name());
 
             csv_string += "\"" + name + "\",\"" + stringValue + "\"\n";
