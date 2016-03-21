@@ -54,7 +54,7 @@ com.updatecopy = {
                     stringValue = unescape(textLayer.stringValue().replace(/[\r\n]+/g, ' ')),
                     name = unescape(textLayer.name());
 
-            csv_string += "\"" + name + "\",\"" + stringValue + "\"\n";
+            csv_string += "\"" + name + "\";\"" + stringValue + "\"\n";
         }
 
         return csv_string;
@@ -163,10 +163,10 @@ com.updatecopy = {
             // It's looking for lines in a key,value format
             // Key and value may each be surronded by quotes
             var expressions = [
-              /^([^"]+?),([^"]+?)$/mg,
-              /^([^"]+?),"([\S\s]+)"$/mg,
-              /^"([\S\s]+)",([^"]+?)$/mg,
-              /^"([\S\s]+)","([\S\s]+)"$/mg,
+              /^([^"]+?);([^"]+?)$/mg,
+              /^([^"]+?);"([\S\s]+)"$/mg,
+              /^"([\S\s]+)";([^"]+?)$/mg,
+              /^"([\S\s]+)";"([\S\s]+)"$/mg,
             ];
 
           var data = {};
