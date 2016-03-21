@@ -87,7 +87,7 @@ com.updatecopy = {
             if ([panel runModal] == NSOKButton) {
                 var url = [panel URL];
                 var cocoaString = [NSString stringWithFormat:"%@", string];
-                [cocoaString writeToURL:url atomically:false encoding:NSUTF16StringEncoding error:nil];
+                [cocoaString writeToURL:url atomically:false encoding:NSUTF8StringEncoding error:nil];
             }
             return true;
         }
@@ -173,7 +173,7 @@ com.updatecopy = {
             for (var i = 0; i < urls.count(); i++) {
                 url = urls[i];
                 filename = [[url lastPathComponent] stringByDeletingPathExtension];
-                getString = NSString.stringWithContentsOfFile_encoding_error(url, NSUTF16StringEncoding, null);
+                getString = NSString.stringWithContentsOfFile_encoding_error(url, NSUTF8StringEncoding, null);
 
                 if(getString){
                     var contents = getString.toString();
