@@ -11,6 +11,7 @@ com.updatecopy = {
         var app = [NSApplication sharedApplication];
         [app displayDialog:msg withTitle:title];
     },
+
     getTextLayersForPage: function(page) {
         var layers = [page children],
                 textLayers = [];
@@ -36,7 +37,9 @@ com.updatecopy = {
 
     isExportTextLayer: function(textLayer) {
         var nameStringValue = unescape(textLayer.name());
-        if (nameStringValue.search('__')) {
+        var isVisible = textLayer.isVisible();
+
+        if (nameStringValue.search('__') && isVisible) {
             return true;
         }
 
