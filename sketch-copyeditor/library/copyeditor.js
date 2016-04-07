@@ -11,6 +11,7 @@ com.updatecopy = {
         var app = [NSApplication sharedApplication];
         [app displayDialog:msg withTitle:title];
     },
+
     getTextLayersForPage: function(page) {
         var layers = [page children],
                 textLayers = [];
@@ -36,7 +37,9 @@ com.updatecopy = {
 
     isExportTextLayer: function(textLayer) {
         var nameStringValue = unescape(textLayer.name());
-        if (nameStringValue.search('__')) {
+        var isVisible = textLayer.isVisible();
+
+        if (nameStringValue.search('__') && isVisible) {
             return true;
         }
 
@@ -48,10 +51,10 @@ com.updatecopy = {
 
         for (var i = 0; i < textLayers.length; i++) {
             var textLayer = textLayers[i],
-                    stringValue = unescape(textLayer.stringValue()),
+                    stringValue = unescape(textLayer.stringValue().replace(/[\r\n]+/g, ' ')),
                     name = unescape(textLayer.name());
 
-            csv_string += "\"" + name + "\",\"" + stringValue + "\"\n";
+            csv_string += "\"" + name + "\";\"" + stringValue + "\"\n";
         }
 
         return csv_string;
@@ -77,14 +80,15 @@ com.updatecopy = {
         return true;
     },
 
-    /*  ---------- begin markgoetz edits: save the text to a file instead of to the clipboard.  ---------- */
     saveStringToFile: function(string) {
         try {
             var panel = NSSavePanel.savePanel();
+            var extension = NSArray.alloc().initWithObjects("csv", nil);
+            panel.setAllowedFileTypes(extension);
             if ([panel runModal] == NSOKButton) {
                 var url = [panel URL];
                 var cocoaString = [NSString stringWithFormat:"%@", string];
-                [cocoaString writeToURL:url atomically:false encoding:NSWindowsCP1252StringEncoding error:nil];
+                [cocoaString writeToURL:url atomically:false encoding:NSUTF8StringEncoding error:nil];
             }
             return true;
         }
@@ -92,7 +96,6 @@ com.updatecopy = {
             log(e);
         }
     },
-    /* ---------- end markgoetz edits ---------- */
 
     updatePageWithData: function(page, language, data) {
         var pageName = [page name],
@@ -160,17 +163,17 @@ com.updatecopy = {
             // It's looking for lines in a key,value format
             // Key and value may each be surronded by quotes
             var expressions = [
-              /^([^"]+?),([^"]+?)$/mg,
-              /^([^"]+?),"([\S\s]+)"$/mg,
-              /^"([\S\s]+)",([^"]+?)$/mg,
-              /^"([\S\s]+)","([\S\s]+)"$/mg,
+              /^([^"]+?);([^"]+?)$/mg,
+              /^([^"]+?);"([\S\s]+)"$/mg,
+              /^"([\S\s]+)";([^"]+?)$/mg,
+              /^"([\S\s]+)";"([\S\s]+)"$/mg,
             ];
 
           var data = {};
             for (var i = 0; i < urls.count(); i++) {
                 url = urls[i];
                 filename = [[url lastPathComponent] stringByDeletingPathExtension];
-                getString = NSString.stringWithContentsOfFile_encoding_error(url, NSWindowsCP1252StringEncoding, null);
+                getString = NSString.stringWithContentsOfFile_encoding_error(url, NSUTF8StringEncoding, null);
 
                 if(getString){
                     var contents = getString.toString();
