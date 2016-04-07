@@ -80,10 +80,11 @@ com.updatecopy = {
         return true;
     },
 
-    /*  ---------- begin markgoetz edits: save the text to a file instead of to the clipboard.  ---------- */
     saveStringToFile: function(string) {
         try {
             var panel = NSSavePanel.savePanel();
+            var extension = NSArray.alloc().initWithObjects("csv", nil);
+            panel.setAllowedFileTypes(extension);
             if ([panel runModal] == NSOKButton) {
                 var url = [panel URL];
                 var cocoaString = [NSString stringWithFormat:"%@", string];
@@ -95,7 +96,6 @@ com.updatecopy = {
             log(e);
         }
     },
-    /* ---------- end markgoetz edits ---------- */
 
     updatePageWithData: function(page, language, data) {
         var pageName = [page name],
