@@ -1,4 +1,4 @@
-#import 'library/copyeditor.js'
+@import 'library/copyeditor.js'
 
 // ---------- markgoetz edit: change to saveStringToFile function ----------
 com.updatecopy.saveStringToFile(com.updatecopy.generateLocaleForCurrentPage());

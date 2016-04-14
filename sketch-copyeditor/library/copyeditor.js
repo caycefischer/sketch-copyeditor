@@ -133,6 +133,53 @@ com.updatecopy = {
         return errorCount;
     },
 
+     /****************************************
+            CSV SECTION!
+    /***************************************/
+
+    localeCSVFromTextLayers: function(textLayers) {
+        var localeCSVString = 'Label,Copy\r';
+
+        for (var i = 0; i < textLayers.length; i++) {
+            var textLayer = textLayers[i],
+                    stringValue = unescape(textLayer.stringValue());
+
+            var textLayer2 = textLayers[i],
+                stringValue2 = unescape(textLayer2.name());
+
+            var value = '"' + stringValue.replace('\r', ',') + '"';
+            var cleanKey = '"' + stringValue2 + '"';
+            
+            localeCSVString = localeCSVString + cleanKey + ',' + value + '\r';
+        }
+
+        return localeCSVString;
+    },
+
+    generateCSVForPage: function(page) {
+        var textLayers = this.getTextLayersForPage(page);
+        return this.localeCSVFromTextLayers(textLayers);
+    },
+
+    generateCSVForCurrentPage: function() {
+        var currentPage = [doc currentPage];
+        return this.generateCSVForPage(currentPage);
+    },
+
+    copyStringToCSV: function(string) {
+        var outputString = [NSString stringWithFormat:"%@", string];
+        var filePath = "/Users/"+ NSUserName() +"/Desktop/copyDeck.csv";
+
+        new AppSandbox().authorize(filePath, function() {});
+
+        [outputString writeToFile:filePath atomically:true encoding:NSUTF8StringEncoding error:nil];
+        return true;
+    },
+
+    /****************************************
+            END CSV SECTION!
+    /***************************************/
+
     updatePageWithFilePicker: function(page) {
       try {
         var openPanel = [NSOpenPanel openPanel];

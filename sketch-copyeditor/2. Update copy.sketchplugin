@@ -1,3 +1,3 @@
-#import 'library/copyeditor.js'
+@import 'library/copyeditor.js'
 
 com.updatecopy.updatePageWithFilePicker([doc currentPage]);
